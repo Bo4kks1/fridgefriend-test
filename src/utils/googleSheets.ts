@@ -21,7 +21,7 @@ import { Session } from './session';
  * Как получить URL — смотрите инструкцию в README.md
  * Пример URL: https://script.google.com/macros/s/AKfycbw.../exec
  */
-const GOOGLE_SCRIPT_URL = '';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFNXaGOLmRVQNyA3w0SLkQI69NwAEsOgiNjYeviWymneys3hS8NbeJY6i8FrnlIGeCvA/exec';
 
 /**
  * Получение названия уровня по проценту совпадения
