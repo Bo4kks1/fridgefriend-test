@@ -1,0 +1,230 @@
+/* Подключаем Tailwind CSS — это фреймворк для быстрой стилизации */
+@import "tailwindcss";
+
+/* ===== КАСТОМНЫЕ СТИЛИ ДЛЯ ПРОЕКТА ===== */
+
+/* Устанавливаем шрифт и плавную прокрутку для всей страницы */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Базовые стили для body — убираем отступы, ставим фон и шрифт */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #fefce8;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+/* ===== АНИМАЦИИ ===== */
+
+/* Анимация плавного появления снизу — элемент выезжает вверх и становится видимым */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Анимация пульсации — элемент немного увеличивается и уменьшается */
+@keyframes pulse-soft {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Анимация обратного отсчёта таймера — круговой прогресс */
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 283;
+  }
+}
+
+/* Анимация плавного появления */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Анимация масштабирования (появление с увеличением) */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Анимация для числа процентов — плавно выезжает и увеличивается */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== КЛАССЫ АНИМАЦИЙ (используем в компонентах) ===== */
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-countUp {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+/* ===== СТИЛИ ДЛЯ ПРОГРЕСС-БАРА ===== */
+
+/* Контейнер прогресс-бара */
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+/* Заполненная часть прогресс-бара — плавно расширяется */
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #ef4444);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* ===== СТИЛИ ДЛЯ КНОПОК ===== */
+
+/* Основная кнопка — большая, яркая, с анимацией при наведении */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  width: 100%;
+  max-width: 340px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Вторичная кнопка — менее заметная, для второстепенных действий */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background: white;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 14px;
+  border: 2px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 340px;
+}
+
+.btn-secondary:hover {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+/* ===== КАРТОЧКА ДЛЯ ШЕРИНГА ===== */
+
+/* Стили карточки результата, которую можно сохранить как картинку */
+.share-card {
+  background: linear-gradient(135deg, #fefce8, #fef3c7, #fde68a);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Декоративный элемент на карточке */
+.share-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ===== СТИЛИ ДЛЯ ВАРИАНТОВ ОТВЕТА ===== */
+
+/* Кнопка варианта ответа в тесте */
+.answer-option {
+  padding: 16px 20px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+/* При наведении — подсвечиваем вариант */
+.answer-option:hover {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+/* Выбранный вариант — яркий фон и рамка */
+.answer-option.selected {
+  border-color: #f59e0b;
+  background: #fef3c7;
+  transform: scale(1.02);
+}
