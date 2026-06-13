@@ -21,7 +21,7 @@ import { Session } from './session';
  * Как получить URL — смотрите инструкцию в README.md
  * Пример URL: https://script.google.com/macros/s/AKfycbw.../exec
  */
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFNXaGOLmRVQNyA3w0SLkQI69NwAEsOgiNjYeviWymneys3hS8NbeJY6i8FrnlIGeCvA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygGBR1ZolvAVk-lAR9eyvWeyWE8uw7gp0TT_9aRiwFIm0y4jG59_gszNViS9UYu97a4g/exec';
 
 /**
  * Получение названия уровня по проценту совпадения
@@ -92,20 +92,24 @@ export async function sendToGoogleSheets(session: Session): Promise<boolean> {
   };
 
   try {
-    // Отправляем POST-запрос к Google Apps Script
-    await fetch(GOOGLE_SCRIPT_URL, {
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors', // Google Apps Script требует этот режим
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-
-    // В режиме no-cors мы не можем прочитать ответ,
-    // но если запрос не вызвал ошибку — данные отправлены
-    console.log('✅ Данные отправлены в Google Sheets');
-    return true;
+  
+    const result = await response.json();
+  
+    if (result.success) {
+      console.log('✅ Данные отправлены в Google Sheets');
+      return true;
+    } else {
+      console.error('❌ Ошибка от сервера:', result.error);
+      return false;
+    }
   } catch (error) {
     console.error('❌ Ошибка отправки в Google Sheets:', error);
     return false;
