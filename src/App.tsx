@@ -167,7 +167,12 @@ const App: React.FC = () => {
    * @param answers — массив ответов пользователя
    */
   const handleQuizComplete = useCallback((answers: number[]) => {
-    if (!session) return;
+      if (!session) return;
+
+      // ✅ Метрика — завершение теста
+      if (typeof window !== 'undefined' && (window as any).ym) {
+          (window as any).ym(110044295, 'reachGoal', 'finish_test');
+      }
     
     // Сохраняем ответы в сессию
     const updatedSession = saveAnswers(session.id, playerNumber, answers);
@@ -268,7 +273,12 @@ const App: React.FC = () => {
    * 4. Показываем экран успеха
    */
   const handleLeadSubmit = useCallback((data: LeadData) => {
-    if (!session) return;
+      if (!session) return;
+
+      // ✅ Метрика — отправка формы
+      if (typeof window !== 'undefined' && (window as any).ym) {
+          (window as any).ym(110044295, 'reachGoal', 'lead_submitted');
+      }
     
     // Сохраняем данные лида в сессию (в localStorage браузера)
     saveLeadData(session.id, data);
