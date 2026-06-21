@@ -140,13 +140,17 @@ const App: React.FC = () => {
    * ОБРАБОТЧИК: Нажатие "Начать" на экране "Как это работает"
    * Создаёт новую сессию и переводит на экран приглашения
    */
-  const handleStartTest = useCallback(() => {
-    // Создаём новую сессию с уникальным ID
-    const newSession = createSession();
-    setSession(newSession);
-    setPlayerNumber(1);
-    setScreen('invite');
-  }, []);
+    const handleStartTest = useCallback(() => {
+        // ✅ Метрика — начало теста
+        if (typeof window !== 'undefined' && (window as any).ym) {
+            (window as any).ym(110044295, 'reachGoal', 'start_test');
+        }
+
+        const newSession = createSession();
+        setSession(newSession);
+        setPlayerNumber(1);
+        setScreen('invite');
+    }, []);
 
   /**
    * ОБРАБОТЧИК: Переход к тесту (после приглашения)
